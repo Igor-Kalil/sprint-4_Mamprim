@@ -50,9 +50,6 @@ app.get('/ajuda', (req,res) => {
     res.json (orientacoes)
 })
 
-app.listen(porta, () => {
-    console.log(`Servidor rodando em http://localhost:${porta}`)
-})
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
 //SPRINT 2
@@ -85,9 +82,6 @@ app.get("/mensagens/:id", (req, res) => {
 
 app.get("/total-mensagens", (req, res) => res.json({ total: mensagens.length }));
 
-app.listen(porta, () => {
-    console.log(`Servidor rodando em http://localhost:${porta}`)
-})
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -114,3 +108,7 @@ app.get("/mensagens-then", (req,res) => {
     .then(lista => res.json(lista))
     .catch(() => res.status(500).json({erro: "Falha na consulta"}));
 });
+
+app.listen(porta, () => {
+    console.log(`Servidor rodando em http://localhost:${porta}`)
+})
