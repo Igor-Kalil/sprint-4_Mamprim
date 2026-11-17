@@ -63,5 +63,5 @@ app.get("/mensagem-erro-async", async (req, res) => {
 });
 
 //-------------------------------------------------------------------//
-    console.log(`Servidor rodando em http://localhost:${porta}`)
+    console.log(`Servidor rodando em http://localhost:${PORT}`)
 
