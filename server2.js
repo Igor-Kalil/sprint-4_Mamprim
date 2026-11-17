@@ -1,7 +1,7 @@
 import express from "express"
 const app = express()
 const PORT = 3000
-app.listen(PORT, "0.0.0.0", () => console.log (`Servidor em http://localhost:${PORT}`));
+
 
 
 //1.1
@@ -63,7 +63,5 @@ app.get("/mensagem-erro-async", async (req, res) => {
 });
 
 //-------------------------------------------------------------------//
-app.listen(porta, () => {
     console.log(`Servidor rodando em http://localhost:${porta}`)
-})
 
