@@ -7,19 +7,36 @@ const PORT = 3000
 
 
 //2.X
+import { mkdir, writeFile, readFile } from 'node:fs/promises';
 
-import { mkdir, writeFile } from "node:fs/promises";
+async function salvarHistorico() {
+    const lista = [
+        { id: 1, usuário: "Fabricio", texto: "Olá mundo"},
+        { id: 2, usuário: "Carlos", texto: "Bom dia a todos!"}
+    ]
+    await mkdir(new URL("./data/", import.meta.url), { recursive: true });
+    const caminhoArquivo = new URL("./data/mensagens-teste.json", import.meta.url);
+    await writeFile(caminhoArquivo, JSON.stringify(lista, null, 2), "utf8");
+}
 
-async function salvarHistorico [{
-    id: 1, nome: "Fabricio", texto:"Boa noite",
-    id: 2, nome: "Kalil", texto: "Até amanhã"
-}]
+await salvarHistorico();
 
-await mkdir(new URL("./data/", import.meta.url), { recursive: true });
+//---------------------------------------------------------------------------------------//
 
-const caminhoArquivo = new URL("./data/mensagens-teste.json", import.meta.url);
+async function LerDadosSeguros(data){
+    try {
+        const conteudo = await readFile(data, "utf8")
+        return JSON.parse(conteudo)
+    } catch(erro) {
+        if (erro.code === "ENOENT") {
+            return []
+        }
+        throw erro
+    }
+}
 
-await writeFile(caminhoArquivo, JSON.stringify(lista, null, 2), "utf8");
+const dados = await LerDadosSeguros(new URL("./data/arquivo-fantasma.json", import.meta.url));
+console.log("Resultado com arquivo ausente:", dados);
 
-console.log(salvarHistorico)
-
+import {LerMensagens} from "./store.js";
+console.log("Mensagens atuais:", await LerMensagens());
